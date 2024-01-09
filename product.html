@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crudcrud_project_1</title>
+    
+</head>
+<body style="background-color:burlywood">
+    <div class="container">
+    <form  style="background-color: lightcoral;text-align: center;zoom: 1.3;"onsubmit="handleFormSubmit(event)">
+        <h1 > PRODUCT SELL</h1>
+        <hr>
+        
+        <label for="am">SELLING PRICE:</label><br>
+        <input style="text-align: center"type="number" , id="am" ,name="email" placeholder="Insert amount"/><br><br>
+        <label for="name" >PRODUCT NAME</label><br>
+        <input style="text-align: center"type="text" , id="name" ,name="name" placeholder="Insert your name" /><br><br>
+       
+        <button style="background-color:brown;border-radius:8px;">Submit</button>
+        
+     </form>
+</div>
+    <ul id="listofitems">
+        <h3>Products</h3>
+    </ul>
+    
+    <button id="total-button">Total Amount</button>
+    <script>
+        var sum1 = 0;
+        function handleTotal(event) {
+            event.preventDefault();
+
+            var existingH3 = document.getElementById('total-purchased');
+            if (!existingH3) {
+
+
+                sum1 = calculate();
+
+
+                var h = document.createElement("h3");
+                h.setAttribute('id', 'total-purchased');
+
+                h.innerHTML = `<h3>Total value worth of products:  ${sum1}</h3>`
+                var userlist = document.getElementById('listofitems');
+
+                userlist.parentNode.insertBefore(h, userlist.nextSibling);
+            }
+            else {
+
+                sum1 = calculate();
+                existingH3.textContent = `Total value worth of products: ${sum1}`;
+            }
+        }
+        function calculate() {
+            var li = document.getElementsByTagName("li");
+            var total = 0;
+
+
+            for (var i = 0; i < li.length; i++) {
+                var value = parseFloat(li[i].textContent);
+                if (!isNaN(value)) {
+                    total += value;
+                }
+            }
+            return total;
+        }
+        document.getElementById('total-button').addEventListener('click', handleTotal);
+
+    </script>
+    <script src="pr2.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+    
+</body>
+</html>
